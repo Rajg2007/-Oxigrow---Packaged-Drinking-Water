@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxigrow - Packaged Drinking Water</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            padding: 10px 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .products-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .product {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            width: 200px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .product h3 {
+            margin: 10px 0;
+        }
+        .product button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .product button:hover {
+            background-color: #218838;
+        }
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Cart Form Style */
+        .cart-container {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .cart-container input,
+        .cart-container select {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .cart-container .half-input {
+            width: calc(48% - 20px);
+            display: inline-block;
+            margin-right: 2%;
+        }
+        .cart-container .half-input:last-child {
+            margin-right: 0;
+        }
+        .cart-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        .price-section {
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><img src="Logo.jpg" alt="" width="50"> Oxigrow - Packaged Drinking Water</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#" onclick="showHome()">Home</a></li>
+        <li><a href="#" onclick="showAbout()">About Us</a></li>
+        <li><a href="#" onclick="showContact()">Contact Us</a></li>
+        <li><a href="#" onclick="showCart()">Cart</a></li>
+        <li><a href="#" onclick="showProfile()">Profile</a></li>
+    </ul>
+</nav>
+
+<div class="content" id="content">
+    <h2>Our Products</h2>
+    <div class="products-grid">
+        <div class="product">
+            <h3>20 Litre Water Bottle</h3>
+            <p>Price: ₹250</p>
+            <button onclick="addToCart('20 Litre', 250)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>500 ml Water Bottle</h3>
+            <p>Price: ₹15</p>
+            <button onclick="addToCart('500 ml', 15)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>300 ml Water Bottle</h3>
+            <p>Price: ₹10</p>
+            <button onclick="addToCart('300 ml', 10)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>1 Litre Water Bottle</h3>
+            <p>Price: ₹20</p>
+            <button onclick="addToCart('1 Litre', 20)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>2 Litre Water Bottle</h3>
+            <p>Price: ₹35</p>
+            <button onclick="addToCart('2 Litre', 35)">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2024 Oxigrow. All Rights Reserved.
+</footer>
+
+<script>
+    // Add product to cart
+    function addToCart(product, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ product: product, price: price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(product + ' added to cart!');
+    }
+
+    // Remove product from cart
+    function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1); // Remove item by index
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showCart(); // Refresh the cart view
+    }
+
+    // Show Home Page
+    function showHome() {
+        document.getElementById('content').innerHTML = `
+            <h2>Our Products</h2>
+            <div class="products-grid">
+                <div class="product">
+                    <h3>20 Litre Water Bottle</h3>
+                    <p>Price: ₹250</p>
+                    <button onclick="addToCart('20 Litre', 250)">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <h3>500 ml Water Bottle</h3>
+                    <p>Price: ₹15</p>
+                    <button onclick="addToCart('500 ml', 15)">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <h3>300 ml Water Bottle</h3>
+                    <p>Price: ₹10</p>
+                    <button onclick="addToCart('300 ml', 10)">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <h3>1 Litre Water Bottle</h3>
+                    <p>Price: ₹20</p>
+                    <button onclick="addToCart('1 Litre', 20)">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <h3>2 Litre Water Bottle</h3>
+                    <p>Price: ₹35</p>
+                    <button onclick="addToCart('2 Litre', 35)">Add to Cart</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Show Cart Page
+    function showCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartHtml = '<h2>Your Cart</h2><ul>';
+        let totalPrice = 0;
+
+        cart.forEach((item, index) => {
+            cartHtml += `<li>${item.product} - ₹${item.price} <button onclick="removeFromCart(${index})">Remove</button></li>`;
+            totalPrice += item.price;
+        });
+
+        cartHtml += '</ul>';
+        cartHtml += `<p>Total: ₹${totalPrice.toFixed(2)}</p>`;
+        cartHtml += `
+        <div class="cart-container">
+            <form onsubmit="placeOrder(event)">
+                <div class="half-input">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                </div>
+                <div class="half-input">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+                </div>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Email Address" required>
+                
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                
+                <label for="deliveryDate">Delivery Date</label>
+                <input type="date" id="deliveryDate" required>
+
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod">
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                </select>
+
+                <label for="address">Delivery Address</label>
+                <input type="text" id="address" placeholder="Delivery Address" required>
+
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+        `;
+        document.getElementById('content').innerHTML = cartHtml;
+    }
+
+    // Place order function
+    function placeOrder(event) {
+        event.preventDefault();
+        alert('Your order has been placed! Thank you for your purchase.');
+        localStorage.removeItem('cart');
+        showHome(); // Reset to home after order
+    }
+
+    // Show About Us Page
+    function showAbout() {
+        document.getElementById('content').innerHTML = `
+            <h2>About Us</h2>
+            <p>SHREE SAMARTH INDUSTRIES feels proud to be associated with your esteemed organization and we appreciate your long business relationship.</p>
+            <p>SHREE SAMARTH INDUSTRIES has been in business for over 8 years. We are identified in the market for high quality products. We are a renowned business organization with 16 massive customer base. The business started in 2016 as a small operation and gradually extended it to different areas in Pune. We are a highly customer-centric organization and work hard to ensure complete satisfaction of our customers, as we believe it is the true indicator of business standing in the market. Our ethical work practices, nominal prices, and timely delivery have made us a favorite among our numerous customers.</p>
+            <p><strong>Our Team:</strong><br>
+                The business employs well-qualified and experienced professionals. To sharpen their skills and keep them updated with the prevailing market scenario, we provide regular training. Some of them are:
+                <ul>
+                    <li>Quality controller</li>
+                    <li>Technicians</li>
+                    <li>Machine operator</li>
+                    <li>Sales & marketing personnel</li>
+                </ul>
+            </p>
+            <p>We look forward to building a long-term association with your organization. Allow us to meet in person to discuss in-depth about the services that we can offer. We are committed to offering seamless services through our network. In case you have any questions or business inquiries, kindly connect with us or the undersigned.</p>
+        `;
+    }
+
+    // Show Contact Us Page
+    function showContact() {
+        document.getElementById('content').innerHTML = `
+            <h2>Contact Us</h2>
+            <p><strong>SHREE SAMARTH INDUSTRIES</strong><br>
+            Mineral Drinking Water, Cold Water Jar Suppliers<br>
+            Near Sajai Mandir, Kamthe Mala, Fursungi, Pune - 412308.<br>
+            Mob.: 9623 64 6767 / 9552 56 6767 / 9689 28 4999</p>
+        `;
+    }
+
+    // Show Profile Page
+    function showProfile() {
+        document.getElementById('content').innerHTML = `
+            <h2>Your Profile</h2>
+            <p>This section is under construction. More features will be added soon.</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
